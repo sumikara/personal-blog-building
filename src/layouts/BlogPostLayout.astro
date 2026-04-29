@@ -1,0 +1,17 @@
+---
+import BaseLayout from '../components/BaseLayout.astro';
+import RetroWindow from '../components/RetroWindow.astro';
+const { frontmatter } = Astro.props;
+---
+<BaseLayout title={`${frontmatter.title} | Maymun Ne Yapıyor?`}>
+  <RetroWindow title={`/${frontmatter.category}/${Astro.url.pathname.split('/').pop()}`}>
+    <article class="post-article">
+      <h1>{frontmatter.title}</h1>
+      <p class="post-meta">{new Date(frontmatter.date).toLocaleDateString('tr-TR')} · {frontmatter.category}</p>
+      {frontmatter.cover && <img src={frontmatter.cover} alt={`${frontmatter.title} kapak görseli`} />}
+      {!frontmatter.cover && <div class="cover-placeholder" aria-label="Kapak görseli yer tutucu" role="img"></div>}
+      <slot />
+      <p><a href="/archive">← archive'e dön</a></p>
+    </article>
+  </RetroWindow>
+</BaseLayout>

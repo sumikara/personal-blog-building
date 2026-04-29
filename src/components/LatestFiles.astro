@@ -1,0 +1,8 @@
+---
+const { posts } = Astro.props;
+---
+<div class="latest-files">
+  {posts.map((post, idx) => (
+    <div>{idx === posts.length - 1 ? '└──' : '├──'} <a href={`/blog/${post.slug}`}>{post.slug}.{post.data.filetype}</a></div>
+  ))}
+</div>

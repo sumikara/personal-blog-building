@@ -1,0 +1,8 @@
+---
+const { title, description, href } = Astro.props;
+---
+<article class="folder-card">
+  <h3 class="folder-title">📁 {title}</h3>
+  <p>{description}</p>
+  <a class="retro-button" href={href}>OPEN FOLDER</a>
+</article>

@@ -1,0 +1,8 @@
+---
+import BaseLayout from '../components/BaseLayout.astro';
+import RetroWindow from '../components/RetroWindow.astro';
+import PostCard from '../components/PostCard.astro';
+import { getCollection } from 'astro:content';
+const posts = (await getCollection('blog')).filter(p=>p.data.category==='econ_lab');
+---
+<BaseLayout title="econ_lab | Maymun Ne Yapıyor?"><RetroWindow title="/econ_lab"><p>Ekonomi, veri, araştırma notları, AI ve sistem düşüncesi.</p><p><a href="/archive">← archive</a></p><div class="post-grid">{posts.map((post)=><PostCard post={post} />)}</div></RetroWindow></BaseLayout>
