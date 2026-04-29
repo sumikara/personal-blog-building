@@ -1,0 +1,34 @@
+---
+import BaseLayout from '../components/BaseLayout.astro';
+import RetroWindow from '../components/RetroWindow.astro';
+import FolderCard from '../components/FolderCard.astro';
+import LatestFiles from '../components/LatestFiles.astro';
+import LoadingBar from '../components/LoadingBar.astro';
+import PostCard from '../components/PostCard.astro';
+import { getCollection } from 'astro:content';
+const posts = (await getCollection('blog')).sort((a,b)=>b.data.date.valueOf()-a.data.date.valueOf());
+const featured = posts.find((p)=>p.data.featured) ?? posts[0];
+const categories = [
+  ['mind_archive','Psikoloji, rüyalar, bilinç, kişisel dönüşüm ve zihinde açık kalan sekmeler.','/mind-archive'],
+  ['econ_lab','Ekonomi, veri, araştırma notları, AI ve sistem düşüncesi.','/econ-lab'],
+  ['lit_notes','Kitaplar, cümleler, karakterler, denemeler ve edebi kırıntılar.','/lit-notes'],
+  ['travel_logs','Şehirler, sokaklar, kültür, yolculuklar ve yaşama ihtimalleri.','/travel-logs']
+];
+---
+<BaseLayout>
+  <RetroWindow title="MAYMUN_NE_YAPIYOR.EXE">
+    <h1 class="hero-title">MAYMUN_NE_YAPIYOR.EXE</h1>
+    <p class="hero-sub">Kişisel arşiv yükleniyor...</p>
+    <p>Ekonomi, psikoloji, edebiyat, seyahat, şehirler, rüyalar, okuma notları ve zihinde açık kalan sekmeler üzerine yazılar.</p>
+    <a href="/archive" class="retro-button">ARŞİVİ AÇ</a>
+    <a href="/about" class="retro-button">ABOUT.TXT</a>
+    <LoadingBar />
+  </RetroWindow>
+  <section class="folder-grid">{categories.map(([title,description,href]) => <FolderCard title={title} description={description} href={href} />)}</section>
+  <h2>LATEST_FILES</h2>
+  <LatestFiles posts={posts.slice(0,4)} />
+  <hr class="pixel-divider"/>
+  <RetroWindow title="FEATURED_WINDOW">
+    <PostCard post={featured} />
+  </RetroWindow>
+</BaseLayout>

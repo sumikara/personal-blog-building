@@ -1,0 +1,22 @@
+---
+import BaseLayout from '../components/BaseLayout.astro';
+import RetroWindow from '../components/RetroWindow.astro';
+import { getCollection } from 'astro:content';
+const posts = await getCollection('blog');
+const map = {
+  mind_archive:'/mind-archive', econ_lab:'/econ-lab', lit_notes:'/lit-notes', travel_logs:'/travel-logs'
+};
+const grouped = Object.groupBy(posts, p => p.data.category);
+---
+<BaseLayout title="archive | Maymun Ne Yapıyor?">
+  <RetroWindow title="/archive">
+    <div class="directory-tree">/archive
+{Object.entries(grouped).map(([cat,items]) => `├── ${cat}\n${(items??[]).map((p)=>`│   ├── ${p.slug}.html`).join('\n')}`).join('\n')}</div>
+    {Object.entries(grouped).map(([cat,items]) => (
+      <section>
+        <h3><a href={map[cat]}>{cat}</a></h3>
+        <ul>{(items ?? []).map((p)=><li><a href={`/blog/${p.slug}`}>{p.data.title}</a></li>)}</ul>
+      </section>
+    ))}
+  </RetroWindow>
+</BaseLayout>

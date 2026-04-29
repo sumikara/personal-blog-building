@@ -1,0 +1,8 @@
+---
+const { label = 'Loading personal archive...', percent = 72 } = Astro.props;
+---
+<div class="loading-wrap">
+  <p>{label}</p>
+  <div class="loading-bar"><div class="loading-fill" style={`width:${percent}%`}></div></div>
+  <p>{percent}%</p>
+</div>

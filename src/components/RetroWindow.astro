@@ -1,0 +1,10 @@
+---
+const { title } = Astro.props;
+---
+<section class="retro-window">
+  <div class="retro-window__titlebar">
+    <span>{title}</span>
+    <div class="window-controls"><span></span><span></span><span></span></div>
+  </div>
+  <div class="window-content"><slot /></div>
+</section>

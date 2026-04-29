@@ -1,0 +1,20 @@
+---
+import Header from './Header.astro';
+import Footer from './Footer.astro';
+import '../styles/global.css';
+const { title = 'Maymun Ne Yapıyor?' } = Astro.props;
+---
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <div class="site-shell">
+      <Header />
+      <main><slot /></main>
+      <Footer />
+    </div>
+  </body>
+</html>

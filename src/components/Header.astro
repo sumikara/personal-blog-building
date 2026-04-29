@@ -1,0 +1,6 @@
+---
+const links = [
+  ['/', 'home'], ['/archive', 'archive'], ['/mind-archive', 'mind_archive'], ['/econ-lab', 'econ_lab'], ['/lit-notes', 'lit_notes'], ['/travel-logs', 'travel_logs'], ['/about', 'about.txt']
+];
+---
+<header class="retro-header"><nav>{links.map(([href,label]) => <a href={href}>{label}</a>)}</nav></header>

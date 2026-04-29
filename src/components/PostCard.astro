@@ -1,0 +1,9 @@
+---
+const { post } = Astro.props;
+---
+<article class="post-card">
+  <p class="post-meta">[{post.slug}.html] · {post.data.date.toLocaleDateString('tr-TR')}</p>
+  <h3>{post.data.title}</h3>
+  <p>{post.data.description}</p>
+  <a class="retro-button" href={`/blog/${post.slug}`}>OPEN FILE</a>
+</article>
